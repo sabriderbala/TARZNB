@@ -1,0 +1,24 @@
+<div class="container">
+  <h1><%="Select your booking dates for #{@caban.name}" %></h1>
+
+  <%= simple_form_for([@caban, @booking]) do |f| %>
+    <div class="row">
+      <div class="col">
+        <%= f.input :start_date, as: :string,
+                    wrapper_html: { class: "mb-4" },
+                    label_html: { class: "form-label text-secondary fw-bold" },
+                    input_html: { data: { controller: "flatpickr" } } %>
+      </div>
+      <div class="col">
+        <%= f.input :end_date, as: :string,
+                    wrapper_html: { class: "mb-4" },
+                    label_html: { class: "form-label text-secondary fw-bold" },
+                    input_html: { data: { controller: "flatpickr" } } %>
+      </div>
+    </div>
+  <%= f.input :status, as: :hidden, input_html: { value: "pending" } %>
+  <%= f.submit %>
+  <% end %>
+
+
+</div>
