@@ -1,0 +1,11 @@
+<div class="container w-25 p-3">
+  <%= simple_form_for [@caban] do |f| %>
+    <%= f.input :name, placeholder: "Tarzan..." %>
+    <%= f.input :description, placeholder: "La cabane est dans un géant arbre magnifique..." %>
+    <%= f.input :price, placeholder: "130$..." %>
+    <%= f.input :address, placeholder: "5 rue du Platane..."%>
+    <%= f.input :photo, as: :file, class: "mr-auto p-2" %>
+      <%= f.submit "Create", class: "btn btn-primary p-2" %>
+      <%= link_to "Back", cabans_path, class: "btn btn-primary p-2" %>
+  <% end %>
+</div>
