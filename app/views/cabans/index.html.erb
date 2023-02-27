@@ -2,9 +2,9 @@
 <div class="container">
   <div class="row">
     <% @cabans.each do |caban| %>
-       <div class="col-sm">
+       <div class="col-lg-4">
           <div class="card-trip">
-            <img src="https://www.les-cabanes.com/wp-content/uploads/2018/09/cabane-bois-arbres.jpg" />
+            <img src="https://www.les-cabanes.com/wp-content/uploads/2018/09/cabane-bois-arbres.jpg"/>
             <div class="card-trip-infos">
               <h2><%= link_to caban.name, caban_path(caban), class:"text-decoration-none text-black" %></h2>
               <h2 class="card-trip-pricing"> <%= caban.price  %> € </h2>

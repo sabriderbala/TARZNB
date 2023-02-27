@@ -37,7 +37,16 @@
     <h5 class="card-text"><%= @caban.description %></h5>
   </div>
   <div class="container d-flex justify-content-end">
+    <div class="m-3">
     <%= link_to "Reserver", new_caban_booking_path(@caban), class: "btn btn-primary" %>
+
+    </div>
+    <div class="m-3">
+    <%= link_to "Retour", cabans_path(@cabans), class: "btn btn-primary" %>
+
+    </div>
+
   </div>
   </div>
+
   </div>
