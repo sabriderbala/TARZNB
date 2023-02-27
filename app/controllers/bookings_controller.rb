@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  
+
   def new
     @booking = Booking.new
     @caban = Caban.find(params[:caban_id])
@@ -11,7 +11,7 @@ class BookingsController < ApplicationController
     @booking.caban = @caban
     @booking.user = current_user
     if @booking.save
-      redirect_to caban_path(@caban)
+      redirect_to root_path
     else
       render :new
     end
@@ -20,6 +20,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date)
+    params.require(:booking).permit(:start_date, :end_date, :status)
   end
 end
