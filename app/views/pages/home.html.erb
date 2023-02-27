@@ -3,7 +3,12 @@
     <h1 class="fs-1 pb-3"><strong>Dormez dans les arbres : Découvrez nos cabanes suspendues uniques en leur genre</strong></h1>
     <p>Réservez dès maintenant votre séjour dans nos cabanes suspendues et vivez une expérience unique et mémorable dans les arbres.</p>
     <div class="d-flex justify-content-center">
-    <a class="btn btn-flat pb-3 pt-3" href="#">Reservez maintenant</a>
+      <div class="m-3">
+        <%= link_to "Reserver une cabane", cabans_path, class: 'btn btn-flat pb-3 pt-3' %>
+      </div>
+      <div class="m-3">
+        <%= link_to "Mettre ma cabane sur Tarz'n'B ", new_caban_path, class: 'btn btn-flat pb-3 pt-3' %>
+      </div>
     </div>
   </div>
 </div>
