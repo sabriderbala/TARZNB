@@ -21,6 +21,22 @@ class CabansController < ApplicationController
     end
   end
 
+  def destroy
+      @caban = Caban.find(params[:id])
+      @caban.destroy
+      redirect_to dashboard_path, status: :see_other
+  end
+
+  def edit
+    @caban = Caban.find(params[:id])
+  end
+
+  def update
+    @caban = Caban.find(params[:id])
+    @caban.update(caban_params)
+    redirect_to caban_path(@caban), status: :see_other
+  end
+
   private
 
   def caban_params
