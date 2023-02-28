@@ -11,6 +11,7 @@
     <div class="card-product-infos">
       <h2><%= booking.caban.name%></h2>
       <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
+      <p> Total de la réservation : <%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</p>
       <p><%= booking.status %></p>
     </div>
   </div>
@@ -25,6 +26,7 @@
     <div class="card-product-infos">
       <h2><%= booking.caban.name%></h2>
       <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
+      <p> Total de la réservation : <%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</p>
       <p><%= booking.status %></p>
       <%= link_to "Accept", accept_booking_path(booking), class: "btn btn-success" %>
       <%= link_to "Refuse", refuse_booking_path(booking), class: "btn btn-danger" %>
@@ -46,8 +48,8 @@
           <div class="card-trip-infos">
               <h2><%=caban.name %></h2>
               <h2 class="card-trip-pricing"> <%= caban.price  %> € </h2>
-              <%= link_to "Delete",caban_path(caban), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-              <%= link_to "Edit",edit_caban_path(caban) %>
+              <%= link_to "Delete", caban_path(caban), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+              <%= link_to "Edit", edit_caban_path(caban) %>
           </div>
         </div>
       </div>
