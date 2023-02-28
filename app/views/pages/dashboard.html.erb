@@ -5,7 +5,7 @@
   <h2> Mes demandes de réservation (en tant que locataire) (<%= @bookings_as_r.count %>) </h2>
   <% @bookings_as_r.each do |booking| %>
   <div class="card-product m-3">
-    <%# <%= cl_image_tag booking.caban.photo.key %>
+    <%= cl_image_tag booking.caban.photos.first.key %>
     <div class="card-product-infos">
       <h2><%= booking.caban.name%></h2>
       <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
