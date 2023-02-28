@@ -26,8 +26,8 @@
       <h2><%= booking.caban.name%></h2>
       <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
       <p><%= booking.status %></p>
-      <%= link_to "Accept", accept_booking_path(booking) %>
-      <%= link_to "Refuse", refuse_booking_path(booking) %>
+      <%= link_to "Accept", accept_booking_path(booking), class: "btn btn-success" %>
+      <%= link_to "Refuse", refuse_booking_path(booking), class: "btn btn-danger" %>
     </div>
   </div>
 
