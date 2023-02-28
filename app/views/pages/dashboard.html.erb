@@ -1,0 +1,34 @@
+<div class="container">
+  <h1> Dashboard </h1>
+
+  <h2> Mes cabanes </h2>
+
+  <%# Noémie %>
+
+  <h2> Mes demandes de réservation (en tant que locataire) (<%= @bookings_as_r.count %>) </h2>
+  <% @bookings_as_r.each do |booking| %>
+  <div class="card-product m-3">
+    <%# <%= cl_image_tag booking.caban.photo.key %>
+    <div class="card-product-infos">
+      <h2><%= booking.caban.name%></h2>
+      <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
+      <p><%= booking.status %></p>
+    </div>
+  </div>
+  <% end %>
+
+  <h2> Mes demandes de réservation (en tant que propriétaire) (<%= @bookings_as_p.count %>)</h2>
+  <% @bookings_as_p.each do |booking| %>
+  <div class="card-product m-3">
+    <%# <%= cl_image_tag @booking.caban.photo.key %>
+    <div class="card-product-infos">
+      <h2><%= booking.caban.name%></h2>
+      <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
+      <p><%= booking.status %></p>
+      <%= link_to "Accept", accept_booking_path(booking) %>
+      <%= link_to "Refuse", refuse_booking_path(booking) %>
+    </div>
+  </div>
+
+  <% end %>
+</div>
