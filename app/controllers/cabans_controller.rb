@@ -1,19 +1,23 @@
 class CabansController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-    @cabans = Caban.all
+    @cabans = policy_scope(Caban)
   end
 
   def show
     @caban = Caban.find(params[:id])
+    authorize @caban
   end
 
   def new
     @caban = Caban.new
+    authorize @caban
   end
 
   def create
     @caban = Caban.new(caban_params)
     @caban.user = current_user
+    authorize @caban
     if @caban.save
       redirect_to caban_path(@caban)
     else
@@ -24,11 +28,13 @@ class CabansController < ApplicationController
   def destroy
       @caban = Caban.find(params[:id])
       @caban.destroy
+      authorize @caban
       redirect_to dashboard_path, status: :see_other
   end
 
   def edit
     @caban = Caban.find(params[:id])
+    authorize @caban
   end
 
   def update
@@ -38,6 +44,7 @@ class CabansController < ApplicationController
     else
       @caban.update(caban_params)
     end
+    authorize @caban
     redirect_to caban_path(@caban), status: :see_other
   end
 
