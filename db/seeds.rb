@@ -5,7 +5,10 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+Booking.destroy_all
 Caban.destroy_all
+User.destroy_all
+
 user = User.create!({
   last_name: "le TA",
   first_name: "Baptiste",
@@ -13,7 +16,14 @@ user = User.create!({
   password: "123456"
 })
 
-Caban.create!({
+user2 = User.create!({
+  last_name: "Nataf",
+  first_name: "Noémie",
+  email: "noemie.nataf@lewagon.com",
+  password: "123456"
+})
+
+Caban.new({
   name: "Cabane 1",
   address: "68 avenue Parmentier",
   price: 120,
@@ -28,7 +38,7 @@ Caban.create!({
       address: "13 allée des pins",
       price: 122,
       description: "Magnifique cabane dans les arbres à 3 mètres de hauteur",
-      user_id: user.id
+      user_id: user2.id
     }
   )
 
@@ -48,7 +58,7 @@ Caban.create!({
       address: "13 allée des boiseries",
       price: 257,
       description: "Magnifique cabane faite en bois",
-      user_id: user.id
+      user_id: user2.id
     }
   )
 

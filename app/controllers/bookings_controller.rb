@@ -25,7 +25,7 @@ class BookingsController < ApplicationController
 
   def refuse
     @booking = Booking.find_by_id(params[:id])
-    @booking.update(status: "refused")
+    @booking.update(status: "declined")
     redirect_to dashboard_path
   end
 
