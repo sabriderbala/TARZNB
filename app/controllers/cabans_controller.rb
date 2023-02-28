@@ -39,7 +39,11 @@ class CabansController < ApplicationController
 
   def update
     @caban = Caban.find(params[:id])
-    @caban.update(caban_params)
+    if params["caban"]["photos"] == [""]
+      @caban.update(caban_params.except(:photos))
+    else
+      @caban.update(caban_params)
+    end
     authorize @caban
     redirect_to caban_path(@caban), status: :see_other
   end

@@ -7,4 +7,5 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   has_many :cabans
   has_many :bookings
+  has_one_attached :photo
 end
