@@ -3,5 +3,6 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    @mycabans = current_user.cabans
   end
 end

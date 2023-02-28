@@ -1,0 +1,19 @@
+<h1>Liste de mes cabanes</h1>
+
+<div class="container">
+  <div class="row">
+    <% @mycabans.each do |caban| %>
+       <div class="col-lg-3">
+          <div class="card-trip">
+              <img src="https://www.les-cabanes.com/wp-content/uploads/2018/09/cabane-bois-arbres.jpg"/>
+          <div class="card-trip-infos">
+              <h2><%=caban.name %></h2>
+              <h2 class="card-trip-pricing"> <%= caban.price  %> € </h2>
+              <%= link_to "Delete",caban_path(caban), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+              <%= link_to "Edit",edit_caban_path(caban) %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
