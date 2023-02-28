@@ -5,7 +5,9 @@
   <h2> Mes demandes de réservation (en tant que locataire) (<%= @bookings_as_r.count %>) </h2>
   <% @bookings_as_r.each do |booking| %>
   <div class="card-product m-3">
+    <% if booking.caban.photos.attached?%>
     <%= cl_image_tag booking.caban.photos.first.key %>
+    <% end %>
     <div class="card-product-infos">
       <h2><%= booking.caban.name%></h2>
       <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
@@ -17,7 +19,9 @@
   <h2> Mes demandes de réservation (en tant que propriétaire) (<%= @bookings_as_p.count %>)</h2>
   <% @bookings_as_p.each do |booking| %>
   <div class="card-product m-3">
+  <% if booking.caban.photos.attached?%>
     <%= cl_image_tag booking.caban.photos.first.key %>
+  <% end %>
     <div class="card-product-infos">
       <h2><%= booking.caban.name%></h2>
       <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
@@ -36,7 +40,9 @@
     <% @cabans_as_p.each do |caban| %>
        <div class="col-lg-3">
           <div class="card-trip">
+          <% if caban.photos.attached?%>
               <%= cl_image_tag caban.photos.first.key %>
+              <% end %>
           <div class="card-trip-infos">
               <h2><%=caban.name %></h2>
               <h2 class="card-trip-pricing"> <%= caban.price  %> € </h2>

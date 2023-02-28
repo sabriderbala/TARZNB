@@ -2,7 +2,7 @@
   <%= simple_form_for [@caban] do |f| %>
     <%= f.input :name, placeholder: "Tarzan..." %>
     <%= f.input :address, placeholder: "5 rue du Platane..."%>
-    <%= f.input :price, placeholder: "prix par jours" %>
+    <%= f.input :price, placeholder: "prix par jour" %>
     <%= f.input :description, placeholder: "La cabane est dans un géant arbre magnifique..." %>
     <%= f.input :photos, as: :file, input_html: { multiple: true }, class: "mr-auto p-2" %>
       <%= f.submit "Create", class: "btn btn-primary p-2" %>

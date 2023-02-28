@@ -19,7 +19,6 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-
 </div>
 </div>
 
@@ -37,10 +36,11 @@
     <h5 class="card-text"><%= @caban.description %></h5>
   </div>
   <div class="container d-flex justify-content-end">
+  <% if @caban.user != current_user %>
     <div class="m-3">
-    <%= link_to "Reserver", new_caban_booking_path(@caban), class: "btn btn-primary" %>
-
+    <%= link_to "Réserver", new_caban_booking_path(@caban), class: "btn btn-primary" %>
     </div>
+  <% end %>
     <div class="m-3">
     <%= link_to "Retour", cabans_path(@cabans), class: "btn btn-primary" %>
 
