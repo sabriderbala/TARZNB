@@ -34,6 +34,7 @@ class CabansController < ApplicationController
   def update
     @caban = Caban.find(params[:id])
     @caban.update(caban_params)
+    redirect_to caban_path(@caban), status: :see_other
   end
 
   private
