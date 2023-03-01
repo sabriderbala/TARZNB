@@ -1,26 +1,35 @@
 <div class="container">
-  <h1><%="Sélectionnez vos dates pour #{@caban.name}" %></h1>
 
-  <%= simple_form_for([@caban, @booking]) do |f| %>
-    <div class="row">
-      <div class="col">
-        <%= f.input :start_date, as: :string,
-                    wrapper_html: { class: "mb-4" },
-                    label_html: { class: "form-label text-secondary fw-bold" },
-                    input_html: { data: { controller: "flatpickr" } } %>
+  <h1><%="Sélectionnez vos dates pour #{@caban.name}" %></h1>
+  <div data-controller="dynamic-booking-price"
+       data-dynamic-booking-price-price-value="<%= @caban.price %>">
+    <%= simple_form_for [@caban, @booking] do |f| %>
+      <div class="row">
+        <div class="col">
+          <%= f.input :start_date, as: :string,
+                    input_html:  {
+                      data: {controller: "flatpickr",
+                        dynamic_booking_price_target: 'startDateInput',
+                        action: 'change->dynamic-booking-price#updatePrice'
+                      }
+                    } %>
+        </div>
+        <div class="col">
+          <%= f.input :end_date, as: :string,
+                    input_html: {
+                     data: {controller: "flatpickr",
+                      dynamic_booking_price_target: 'endDateInput',
+                      action: 'change->dynamic-booking-price#updatePrice'
+                     }
+                    } %>
+        </div>
       </div>
-      <div class="col">
-        <%= f.input :end_date, as: :string,
-                    wrapper_html: { class: "mb-4" },
-                    label_html: { class: "form-label text-secondary fw-bold" },
-                    input_html: { data: { controller: "flatpickr" } } %>
-      </div>
-    </div>
-  <%= f.input :status, as: :hidden, input_html: { value: "pending" } %>
+      <%= f.input :status, as: :hidden, input_html: { value: "pending" } %>
+
+    <p> Prix total de la réservation : <span data-dynamic-booking-price-target="priceHolder"><%= @caban.price %></span> € </p>
   <%= f.submit %>
   <% end %>
+</div>
 
-  <%= link_to "Retour", caban_path(@caban), class: "btn btn-primary" %>
-
-
+  <%= link_to "Retour", caban_path(@caban), class: "btn my-2" %>
 </div>
