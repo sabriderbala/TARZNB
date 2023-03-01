@@ -45,7 +45,7 @@ export default class extends Controller {
       var days = 0
     }
     // Add 1 day by default
-    return days + 1
+    return days
   }
 
   #totalValue(days) {
