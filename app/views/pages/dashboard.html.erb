@@ -1,10 +1,23 @@
+
+<div class="px-4 py-5 my-5 text-center border" style="background: white">
+<h1 class="display-5 fw-bold">Bienvenue dans votre dashboard <%= current_user.first_name %> ! </h1>
+<div class="col-lg-6 mx-auto">
+      <p class="lead mb-4" style="color: grey">Gérer vos cabanes, vos reservations et les reservations de vos clients sur votre dashboard</p>
+
+
+
+</div>
+
+</div>
+
 <div class="container">
-<h1> Dashboard </h1>
 
-
-  <h2> Mes demandes de réservation (en tant que locataire) (<%= @bookings_as_r.count %>) </h2>
+<div class="row justify-content-center">
+ <div class="col-4">
+  <div class="p-3">
+  <h4 class="text-center"> Mes réservations(<%= @bookings_as_r.count %>) </h4>
   <% @bookings_as_r.each do |booking| %>
-  <div class="card-product m-3">
+  <div class="card-product mt-2 m-3">
     <% if booking.caban.photos.attached?%>
     <%= cl_image_tag booking.caban.photos.first.key %>
     <% end %>
@@ -15,10 +28,13 @@
     </div>
   </div>
   <% end %>
-
-  <h2> Mes demandes de réservation (en tant que propriétaire) (<%= @bookings_as_p.count %>)</h2>
+  </div>
+ </div>
+<div class="col-4">
+  <div class="p-3">
+  <h4 class="text-center"> Mes demandes de réservation (<%= @bookings_as_p.count %>)</h4>
   <% @bookings_as_p.each do |booking| %>
-  <div class="card-product m-3">
+  <div class="card-product mt-3 m-3">
   <% if booking.caban.photos.attached?%>
     <%= cl_image_tag booking.caban.photos.first.key %>
   <% end %>
@@ -32,25 +48,34 @@
   </div>
 
   <% end %>
-
-<h2>Liste de mes cabanes</h2>
-
-
-  <div class="row">
-    <% @cabans_as_p.each do |caban| %>
-       <div class="col-lg-3">
-          <div class="card-trip">
-          <% if caban.photos.attached?%>
-              <%= cl_image_tag caban.photos.first.key %>
-              <% end %>
-          <div class="card-trip-infos">
-              <h2><%=caban.name %></h2>
-              <h2 class="card-trip-pricing"> <%= caban.price  %> € </h2>
-              <%= link_to "Delete",caban_path(caban), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-              <%= link_to "Edit",edit_caban_path(caban) %>
-          </div>
-        </div>
-      </div>
-    <% end %>
   </div>
+</div>
+<div class="col-4">
+  <div class="p-3">
+  <h4 class="text-center">Liste de mes cabanes</h4>
+    <div class="row">
+      <% @cabans_as_p.each do |caban| %>
+         <div class="col-6 mt-3">
+            <div class="card-trip">
+            <% if caban.photos.attached?%>
+                <%= cl_image_tag caban.photos.first.key %>
+            <% end %>
+            <div class="container mt-3">
+            <div class="d-flex justify-content-between border-bottom border-secondary">
+              <p class="fw-normal"><strong><%=caban.name %></strong></p>
+              <p class="fw-normal"><%= caban.price %>€</p>
+            </div>
+            <div class="mt-1">
+              <p class="fw-normal fst-italic"><%= caban.address %></p>
+            </div>
+
+          </div>
+          </div>
+    </div>
+    <% end %>
+
+  </div>
+</div>
+
+</div>
 </div>
