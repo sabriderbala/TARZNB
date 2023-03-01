@@ -12,6 +12,7 @@
       <h2><%= booking.caban.name%></h2>
       <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
       <p><%= booking.status %></p>
+      <p><%= link_to "Cancel", destroy_booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></p>
     </div>
   </div>
   <% end %>

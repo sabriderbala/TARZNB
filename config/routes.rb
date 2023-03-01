@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     member do
       get :accept, to: "bookings#accept"
       get :refuse, to: "bookings#refuse"
+      delete :destroy, to: "bookings#destroy", as: :destroy
     end
   end
 
