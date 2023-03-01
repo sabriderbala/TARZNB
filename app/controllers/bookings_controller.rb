@@ -2,11 +2,13 @@ class BookingsController < ApplicationController
 
   def new
     @booking = Booking.new
+    authorize @booking
     @caban = Caban.find(params[:caban_id])
   end
 
   def create
     @booking = Booking.new(booking_params)
+    authorize @booking
     @caban = Caban.find(params[:caban_id])
     @booking.caban = @caban
     @booking.user = current_user
@@ -20,12 +22,14 @@ class BookingsController < ApplicationController
   def accept
     @booking = Booking.find_by_id(params[:id])
     @booking.update(status: "accepted")
+    authorize @booking
     redirect_to dashboard_path
   end
 
   def refuse
     @booking = Booking.find_by_id(params[:id])
     @booking.update(status: "declined")
+    authorize @booking
     redirect_to dashboard_path
   end
 

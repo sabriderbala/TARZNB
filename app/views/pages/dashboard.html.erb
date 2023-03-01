@@ -24,6 +24,7 @@
     <div class="card-product-infos">
       <h2><%= booking.caban.name%></h2>
       <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
+      <p> Total de la réservation : <%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</p>
       <p><%= booking.status %></p>
     </div>
   </div>
@@ -41,13 +42,33 @@
     <div class="card-product-infos">
       <h2><%= booking.caban.name%></h2>
       <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
+      <p> Total de la réservation : <%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</p>
       <p><%= booking.status %></p>
-      <%= link_to "Accept", accept_booking_path(booking) %>
-      <%= link_to "Refuse", refuse_booking_path(booking) %>
+      <%= link_to "Accept", accept_booking_path(booking), class: "btn btn-success" %>
+      <%= link_to "Refuse", refuse_booking_path(booking), class: "btn btn-danger" %>
     </div>
   </div>
 
   <% end %>
+
+<h2>Liste de mes cabanes</h2>
+
+
+  <div class="row">
+    <% @cabans_as_p.each do |caban| %>
+       <div class="col-lg-3">
+          <div class="card-trip">
+          <% if caban.photos.attached?%>
+              <%= cl_image_tag caban.photos.first.key %>
+              <% end %>
+          <div class="card-trip-infos">
+              <h2><%=caban.name %></h2>
+              <h2 class="card-trip-pricing"> <%= caban.price  %> € </h2>
+
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 <div class="col-4">
@@ -68,6 +89,8 @@
             <div class="mt-1">
               <p class="fw-normal fst-italic"><%= caban.address %></p>
             </div>
+            <%= link_to "Delete", caban_path(caban), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+            <%= link_to "Edit", edit_caban_path(caban) %>
 
           </div>
           </div>
