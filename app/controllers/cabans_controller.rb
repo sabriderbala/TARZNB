@@ -2,10 +2,17 @@ class CabansController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @cabans = policy_scope(Caban)
+    @markers = @cabans.geocoded.map do |caban|
+      {
+        lat: caban.latitude,
+        lng: caban.longitude
+      }
+    end
   end
 
   def show
     @caban = Caban.find(params[:id])
+    @marker = [{ lat: @caban.latitude, lng: @caban.longitude }]
     authorize @caban
   end
 
