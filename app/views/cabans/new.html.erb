@@ -1,11 +1,16 @@
-<div class="container w-25 p-3">
-  <%= simple_form_for [@caban] do |f| %>
-    <%= f.input :name, placeholder: "Tarzan..." %>
-    <%= f.input :address, placeholder: "5 rue du Platane..."%>
-    <%= f.input :price, placeholder: "prix par jour" %>
-    <%= f.input :description, placeholder: "La cabane est dans un géant arbre magnifique..." %>
-    <%= f.input :photos, as: :file, input_html: { multiple: true }, class: "mr-auto p-2" %>
-      <%= f.submit "Create", class: "btn btn-primary p-2" %>
-      <%= link_to "Back", cabans_path, class: "btn btn-primary p-2" %>
-  <% end %>
+<div class="container p-5">
+  <div class= "d-flex justify-content-center">
+    <div class="form p-5" style="background:white; width: 500px">
+      <h2 class="title">Nouvelle Cabane</h2>
+      <%= simple_form_for [@caban] do |f| %>
+        <%= f.input :name, placeholder: "Tarzan..." %>
+        <%= f.input :address, placeholder: "5 rue du Platane..."%>
+        <%= f.input :price, placeholder: "prix par jour" %>
+        <%= f.input :description, placeholder: "La cabane est dans un géant arbre magnifique..." %>
+        <%= f.input :photos, as: :file, input_html: { multiple: true }, class: "mr-auto p-2" %>
+      <%= f.submit "Créer", class: "btn btn-primary p-2" %>
+      <%= link_to "Retour", cabans_path, class: "btn btn-primary p-2" %>
+      <% end %>
+    </div>
+  </div>
 </div>
