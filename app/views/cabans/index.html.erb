@@ -1,6 +1,6 @@
 <div class="mt-1">
   <div class="row">
-    <div class="col-3">
+    <div class="col-3 p-3">
         <% @cabans.each do |caban| %>
         <%= link_to caban_path(caban), class:"text-decoration-none", style:"color: black" do %>
         <div class="card-trip col-12 m-2">
@@ -38,7 +38,7 @@
     </div>
 
     <div class="col-9 mt-3">
-      <div style="width: 100%; height: 1600px;"
+      <div style="height: 100vh; position: sticky; top: 0;"
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
