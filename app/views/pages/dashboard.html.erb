@@ -11,74 +11,70 @@
 </div>
 
 <div class="container">
-
-<div class="row justify-content-center">
- <div class="col-6">
-  <div class="p-3">
-  <h4 class="text-center"> Mes réservations(<%= @bookings_as_r.count %>) </h4>
-  <% @bookings_as_r.each do |booking| %>
-  <div class="card-product mt-2 m-3">
-    <% if booking.caban.photos.attached?%>
-    <%= cl_image_tag booking.caban.photos.first.key %>
-    <% end %>
-    <div class="card-product-infos">
-      <h2><%= booking.caban.name%></h2>
-      <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
-      <p> Total de la réservation : <%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</p>
-      <p><%= booking.status %></p>
+  <div class="row">
+    <div class="col-6">
+    <div>
+      <h4 class="text-center"> Mes réservations(<%= @bookings_as_r.count %>) </h4>
+      <% @bookings_as_r.each do |booking| %>
+      <div class="card-product mt-3 m-3">
+      <% if booking.caban.photos.attached?%>
+        <%= cl_image_tag booking.caban.photos.first.key %>
+      <% end %>
+      <div class="card-product-infos">
+        <h2><%= booking.caban.name%></h2>
+        <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
+        <p> Total de la réservation : <%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</p>
+        <p><%= booking.status %></p>
+      </div>
+      </div>
+      <% end %>
     </div>
-  </div>
-  <% end %>
-  </div>
- </div>
-<div class="col-6">
-  <div class="p-3">
-  <h4 class="text-center"> Mes demandes de réservation (<%= @bookings_as_p.count %>)</h4>
-  <% @bookings_as_p.each do |booking| %>
-  <div class="card-product mt-3 m-3">
-  <% if booking.caban.photos.attached?%>
-    <%= cl_image_tag booking.caban.photos.first.key %>
-  <% end %>
+    </div>
+    <div class="col-6">
+    <div>
+      <h4 class="text-center"> Mes demandes de réservation (<%= @bookings_as_p.count %>)</h4>
+      <% @bookings_as_p.each do |booking| %>
+    <div class="card-product mt-3 m-3">
+        <% if booking.caban.photos.attached?%>
+          <%= cl_image_tag booking.caban.photos.first.key %>
+        <% end %>
     <div class="card-product-infos">
-      <h2><%= booking.caban.name%></h2>
-      <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
-      <p> Total de la réservation : <%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</p>
-      <p><%= booking.status %></p>
+        <h2><%= booking.caban.name%></h2>
+        <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
+        <p> Total de la réservation : <%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</p>
+        <p><%= booking.status %></p>
+    </div>
       <%= link_to "Accept", accept_booking_path(booking), class: "btn btn-success" %>
       <%= link_to "Refuse", refuse_booking_path(booking), class: "btn btn-danger" %>
     </div>
-  </div>
-
-  <% end %>
-
-<div class="col-6">
-  <div class="p-3">
-  <h4 class="text-center">Liste de mes cabanes</h4>
-    <div class="row">
-      <% @cabans_as_p.each do |caban| %>
-         <div class="col-6 mt-3">
-            <div class="card-trip">
-            <% if caban.photos.attached?%>
-                <%= cl_image_tag caban.photos.first.key %>
-            <% end %>
-            <div class="container mt-3">
-            <div class="d-flex justify-content-between border-bottom border-secondary">
-              <p class="fw-normal"><strong><%=caban.name %></strong></p>
-              <p class="fw-normal"><%= caban.price %>€</p>
-            </div>
-            <div class="mt-1">
-              <p class="fw-normal fst-italic"><%= caban.address %></p>
-            </div>
+      <% end %>
+    </div>
+    </div>
+    <div class="col-12 ">
+    <div>
+      <h4 class="text-center">Liste de mes cabanes</h4>
+      <div class="row">
+        <% @cabans_as_p.each do |caban| %>
+      <div class="col-6 mt-3">
+      <div class="card-trip">
+        <% if caban.photos.attached?%>
+        <%= cl_image_tag caban.photos.first.key %>
+        <% end %>
+        <div class="container mt-3">
+          <div class="d-flex justify-content-between border-bottom border-secondary">
+            <p class="fw-normal"><strong><%=caban.name %></strong></p>
+            <p class="fw-normal"><%= caban.price %>€</p>
+          </div>
+          <div class="mt-1">
+            <p class="fw-normal fst-italic"><%= caban.address %></p>
+          </div>
             <%= link_to "Delete", caban_path(caban), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
             <%= link_to "Edit", edit_caban_path(caban) %>
-
-          </div>
-          </div>
+        </div>
+      </div>
     </div>
     <% end %>
 
+    </div>
   </div>
-</div>
-
-</div>
 </div>

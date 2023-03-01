@@ -33,6 +33,17 @@ class BookingsController < ApplicationController
     redirect_to dashboard_path
   end
 
+  def destroy
+    @booking = Booking.find_by_id(params[:id])
+    if @booking.status == "pending"
+      @booking.destroy
+      authorize @booking
+      redirect_to dashboard_path
+    else
+      redirect_to dashboard_path
+    end
+  end
+
   private
 
   def booking_params
