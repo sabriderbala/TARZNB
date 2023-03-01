@@ -3,21 +3,31 @@
   <h1><%="Sélectionnez vos dates pour #{@caban.name}" %></h1>
   <div data-controller="dynamic-booking-price"
        data-dynamic-booking-price-price-value="<%= @caban.price %>">
-    <%= simple_form_for [@caban, @booking] do |f| %>
+    <%= simple_form_for [@caban, @booking],
+                    html: {
+                      data: {
+                        controller: 'flatpickr',
+                        # flatpickr_dates_value: "#{@caban.flatpickr_booked_dates_object}"
+                      }
+                    } do |f| %>
       <div class="row">
         <div class="col">
-          <%= f.input :start_date, as: :string,
+          <%= f.input :start_date, as: :string, label: false,
                     input_html:  {
-                      data: {controller: "flatpickr",
+                      class: 'd-none',
+                      data: {
+                        flatpickr_target: 'startDateInput',
                         dynamic_booking_price_target: 'startDateInput',
                         action: 'change->dynamic-booking-price#updatePrice'
                       }
                     } %>
         </div>
         <div class="col">
-          <%= f.input :end_date, as: :string,
+          <%= f.input :end_date, as: :string, label: false,
                     input_html: {
-                     data: {controller: "flatpickr",
+                      class: 'd-none',
+                     data: {
+                      flatpickr_target: 'endDateInput',
                       dynamic_booking_price_target: 'endDateInput',
                       action: 'change->dynamic-booking-price#updatePrice'
                      }
