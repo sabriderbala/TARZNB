@@ -22,8 +22,14 @@
           <li class="nav-item">
             <%= link_to "All Cabans", cabans_path, class: "nav-link" %>
           </li>
+
           <li class="nav-item dropdown">
-            <%= cl_image_tag current_user.photo.key, crop: :fit, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <% if current_user.photo.attached?%>
+              <%= cl_image_tag current_user.photo.key, crop: :fit, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <% else %>
+              <%= image_tag "https://cdn.dribbble.com/userupload/2582751/file/original-f6ac5f1e412b80da59bcf4eaff521100.jpg?resize=400x0", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown"}, 'aria-haspopup': true, 'aria-expanded': false  %>
+            <% end %>
+
             <%= current_user.first_name.capitalize %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>
@@ -34,7 +40,7 @@
           <li class="nav-item">
             <%= link_to "Login", new_user_session_path, class: "nav-link" %>
           </li>
-        <% end %>
+        <% end %> 
       </ul>
     </div>
   </div>
