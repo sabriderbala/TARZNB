@@ -2,7 +2,7 @@
 module CabanConcern
   def booked_dates
     # renvoie un array d'array des dates de debut et de fin de tous les bookings du pokemon
-    bookings.pluck(:start_date, :end_date)
+    bookings.where(status: ["accepted", "pending"]).pluck(:start_date, :end_date)
   end
 
   def simple_format_booked_dates

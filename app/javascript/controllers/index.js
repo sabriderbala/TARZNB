@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AddressAutocompleteController from "./address_autocomplete_controller"
+application.register("address-autocomplete", AddressAutocompleteController)
+
 import DynamicBookingPriceController from "./dynamic_booking_price_controller"
 application.register("dynamic-booking-price", DynamicBookingPriceController)
 
@@ -18,3 +21,9 @@ application.register("map", MapController)
 
 import TypedJsController from "./typed_js_controller"
 application.register("typed-js", TypedJsController)
+
+import { Application } from '@hotwired/stimulus'
+import Dropdown from 'stimulus-dropdown'
+
+const application = Application.start()
+application.register('dropdown', Dropdown)

@@ -34,6 +34,17 @@
   <div class="infos mt-3">
     <h5 class="fst-italic">Découvrez cette magnifique cabane située : <%= @caban.address %></h5>
     <h5 class="card-text"><%= @caban.description.capitalize %></h5>
+     <% if @caban.user != current_user %>
+      <div class="d-flex align-items-center">
+        <h5 class="card-text mb-0 me-2"> Votre super hôte :</h5>
+        <% if @caban.user.photo.attached?%>
+          <%= cl_image_tag @caban.user.photo.key, crop: :fit, class: "avatar me-2"%>
+        <% else %>
+          <%= image_tag "https://cdn.dribbble.com/userupload/2582751/file/original-f6ac5f1e412b80da59bcf4eaff521100.jpg?resize=400x0", class: "avatar me-2" %>
+        <% end %>
+        <h5 class="card-text"><%=@caban.user.first_name %></h5>
+      </div>
+    <% end %>
   </div>
   <div class="container d-flex justify-content-end">
   <% if @caban.user != current_user %>

@@ -2,11 +2,25 @@ class CabansController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @cabans = policy_scope(Caban)
+    if params[:query].present?
+      @cabans = Caban.global_search(params[:query])
+    end
+    
     @markers = @cabans.geocoded.map do |caban|
       {
         lat: caban.latitude,
         lng: caban.longitude
+
       }
+    end
+
+    @cabans = Caban.all
+    if params[:order] == "ASC"
+      @cabans = Caban.order(:price)
+    elsif params[:order] == "DESC"
+      @cabans = Caban.order(price: :desc)
+    else
+      @cabans = Caban.all
     end
   end
 

@@ -1,41 +1,64 @@
-<div class="page">
-  <div class="mt-1">
-    <div class="row">
-      <div class="col-3 p-3">
-          <% @cabans.each do |caban| %>
+<div class="pages">
+<div class="mt-1">
+  <div class="row">
+    <div class="col-3 p-3">
+      <%= form_with url: cabans_path, method: :get, class: "d-flex p-2" do %>
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          placeholder: "Find a caban" %>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      <% end %>
+      <div class="dropdown p-2">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          Trier par prix
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <li class="dropdown-item"><%= link_to "Ascendant", cabans_path(order: "ASC")%></li>
+          <li class="dropdown-item"><%= link_to "Descendant", cabans_path(order: "DESC")%></li>
+        </ul>
+      </div>
+
+      <div class="row m-2">
+        <% @cabans.each do |caban| %>
           <%= link_to caban_path(caban), class:"text-decoration-none", style:"color: black" do %>
-          <div class="card-trip col-12 m-2">
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner" >
-                <% caban.photos.each_with_index do |photo, index|%>
-                  <% if index == 0 %>
-                    <div class="carousel-item active">
-                  <% else %>
-                    <div class="carousel-item">
+            <div class="card-trip col-12 m-2">
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner" >
+                  <% caban.photos.each_with_index do |photo, index|%>
+                    <% if index == 0 %>
+                      <div class="carousel-item active">
+                    <% else %>
+                      <div class="carousel-item">
+                    <% end %>
+                    <%= cl_image_tag photo.key, height:300, width:500, crop: :fill%>
+                      </div>
                   <% end %>
-                    <%= cl_image_tag photo.key, height: 300, width: 500, crop: :fill %>
-                    </div>
-                <% end %>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                      </div>
+                </div>
+              <div class="card-trip-infos">
+                <div>
+                  <h2><%=caban.name.capitalize %></h2>
+                  <p><%= caban.address.capitalize %></p>
+                </div>
+                <h2 class="card-trip-pricing"><%= caban.price %>€</h2>
               </div>
             </div>
-            <div class="card-trip-infos">
-              <div>
-                <h2><%=caban.name.capitalize %></h2>
-                <p><%= caban.address.capitalize %></p>
-              </div>
-              <h2 class="card-trip-pricing"><%= caban.price %>€</h2>
-            </div>
-          </div>
+
           <% end %>
-          <% end %>
+        <% end %>
+
+      </div>
+        <%= link_to "Ajouter ma cabane", new_caban_path, class: 'btn btn-primary m-2 pb-3 pt-3 w-100' %>
+
       </div>
 
       <div class="col-9 mt-3">
@@ -46,4 +69,6 @@
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>
