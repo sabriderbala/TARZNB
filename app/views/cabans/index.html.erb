@@ -1,6 +1,14 @@
 <div class="mt-1">
   <div class="row">
     <div class="col-3 p-3">
+            <%= form_with url: cabans_path, method: :get, class: "d-flex" do %>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Find a caban"
+          %>
+          <%= submit_tag "Search", class: "btn btn-primary" %>
+        <% end %>
       <div class="dropdown p-2">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           Trier par prix
@@ -21,30 +29,27 @@
                 <% else %>
                   <div class="carousel-item">
                 <% end %>
-                  <%= cl_image_tag photo.key, height: 300, width: 500, crop: :fill %>
-                  </div>
-              <% end %>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+            <div class="card-trip-infos">
+              <div>
+                <h2><%=caban.name %></h2>
+                <p><%= caban.address %></p>
+              </div>
+              <h2 class="card-trip-pricing"><%= caban.price %>€</h2>
             </div>
           </div>
-          <div class="card-trip-infos">
-            <div>
-              <h2><%=caban.name %></h2>
-              <p><%= caban.address %></p>
-            </div>
-            <h2 class="card-trip-pricing"><%= caban.price %>€</h2>
-          </div>
-        </div>
-        <% end %>
-        <% end %>
-    </div>
+          <% end %>
+          <% end %>
+      </div>
 
     <div class="col-9 mt-3">
       <div style="height: 100vh; position: sticky; top: 0;"

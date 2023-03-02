@@ -1,16 +1,19 @@
-<div class="container p-5">
-  <div class= "d-flex justify-content-center">
-    <div class="form p-5" style="background:white; width: 500px">
-      <h2 class="title">Nouvelle Cabane</h2>
-      <%= simple_form_for [@caban] do |f| %>
-        <%= f.input :name, placeholder: "Tarzan..." %>
-        <%= f.input :address, placeholder: "5 rue du Platane..."%>
-        <%= f.input :price, placeholder: "prix par jour" %>
-        <%= f.input :description, placeholder: "La cabane est dans un géant arbre magnifique..." %>
-        <%= f.input :photos, as: :file, input_html: { multiple: true }, class: "mr-auto p-2" %>
-      <%= f.submit "Créer", class: "btn btn-primary p-2" %>
-      <%= link_to "Retour", cabans_path, class: "btn btn-primary p-2" %>
-      <% end %>
+<div style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1516528387618-afa90b13e000?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80); height: 800px;">
+  <div class="container p-5">
+    <div class= "d-flex justify-content-center">
+      <div class="form p-5" style="background:white; width: 500px">
+        <h2 class="title">Nouvelle Cabane</h2>
+        <%= simple_form_for [@caban] do |f| %>
+          <%= f.input :name, placeholder: "Tarzan", label: "Nom" %>
+          <p>Adresse</p>
+          <%= f.input :address, as: :hidden, input_html: {data: {address_autocomplete_target: "address"}}, wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}, placeholder: "5 rue du Platane", class: "d-none"%>
+          <%= f.input :price, placeholder: "100 €", label: "Prix par nuit" %>
+          <%= f.input :description, placeholder: "La cabane est dans un arbre magnifique..." %>
+          <%= f.input :photos, as: :file, input_html: { multiple: true }, class: "mr-auto p-2" %>
+        <%= f.submit "Créer", class: "btn btn-primary p-2" %>
+        <%= link_to "Retour", cabans_path, class: "btn p-2" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
