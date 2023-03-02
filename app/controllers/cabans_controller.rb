@@ -10,7 +10,17 @@ class CabansController < ApplicationController
       {
         lat: caban.latitude,
         lng: caban.longitude
+
       }
+    end
+
+    @cabans = Caban.all
+    if params[:order] == "ASC"
+      @cabans = Caban.order(:price)
+    elsif params[:order] == "DESC"
+      @cabans = Caban.order(price: :desc)
+    else
+      @cabans = Caban.all
     end
   end
 
