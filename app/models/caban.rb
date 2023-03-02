@@ -1,5 +1,11 @@
 class Caban < ApplicationRecord
   include CabanConcern
+  include PgSearch::Model
+  pg_search_scope :global_search,
+  against: [ :name, :description, :address ],
+  using: {
+    tsearch: { prefix: true }
+  }
 
   belongs_to :user
   has_many :bookings
