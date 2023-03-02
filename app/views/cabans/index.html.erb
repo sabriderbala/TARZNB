@@ -1,14 +1,15 @@
 <div class="mt-1">
-  <%= form_with url: cabans_path, method: :get, class: "d-flex" do %>
-    <%= text_field_tag :query,
-      params[:query],
-      class: "form-control",
-      placeholder: "Find a caban"
-    %>
-    <%= submit_tag "Search", class: "btn btn-primary" %>
-  <% end %>
+
     <div class="row">
       <div class="col-3 p-3">
+        <%= form_with url: cabans_path, method: :get, class: "d-flex" do %>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Find a caban"
+          %>
+          <%= submit_tag "Search", class: "btn btn-primary" %>
+        <% end %>
           <% @cabans.each do |caban| %>
           <%= link_to caban_path(caban), class:"text-decoration-none", style:"color: black" do %>
           <div class="card-trip col-12 m-2">
