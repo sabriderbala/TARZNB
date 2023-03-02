@@ -1,18 +1,23 @@
+
+<div class="page" style="background: #EDF1D6; display: flex; flex-direction: column; min-height: 100vh;">
 <div class="px-4 py-5 my-0 text-center" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1516528387618-afa90b13e000?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)">
   <h1 class="display-5 fw-bold" style="color: white"><i class="fa-sharp fa-solid fa-house-user"></i> Bienvenue dans votre dashboard <%= current_user.first_name %> ! </h1>
   <div class="col-lg-6 mx-auto">
       <p class="lead mb-4" style="color: #EDF1D6">Gérez vos cabanes, vos réservations et les réservations de vos clients</p>
   </div>
-  <div class="row justify-content-center p-2" style="background: #9DC08B;">
+</div>
 
-    <div class="col-4 m-2 p-3 border" style="background: #40513B; border-radius: 5px;">
-        <h6 class="text-start pb-3" style="color : #EDF1D6"><strong>Liste de mes cabanes</strong></h6>
+  <div class="row justify-content-center p-2" style="background: #EDF1D6;">
+
+    <div class="col-4 m-2 p-3" style="background: #EDF1D6; border-radius: 5px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+        <h6 class="text-start pb-3" style="color : #40513B"><strong>Liste de mes cabanes</strong></h6>
+
           <% @cabans_as_p.each do |caban| %>
-              <div class="card-product m-2" style="border-radius: 15px; background: #9DC08B">
+              <div class="card-product m-2" style="border-radius: 5px; background: #EDF1D6;">
                 <% if caban.photos.attached?%>
                   <%= cl_image_tag caban.photos.first.key %>
                 <% end %>
-                <div class="card-product-infos">
+                <div class="card-product-infos" style="height: fit-content">
                     <h2><%=caban.name %></h2>
                     <p><%= caban.price %>€</p>
                     <p class="fw-normal fst-italic"><%= caban.address %></p>
@@ -29,16 +34,22 @@
                 </div>
               </div>
           <% end %>
+          <div class="d-flex justify-content-end">
+            <%= link_to new_caban_path do %>
+              <i class="fa-solid fa-plus"></i>
+              Ajouter une cabane
+            <% end %>
+          </div>
     </div>
 
-    <div class="col-3 m-2 p-3 border" style="background: #40513B; border-radius: 5px;">
-      <h6 class="text-start pb-3" style="color : #EDF1D6"><strong>Mes réservations(<%= @bookings_as_r.count %>)</strong></h6>
+    <div class="col-4 m-2 p-3" style="background: #EDF1D6; border-radius: 5px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+      <h6 class="text-start pb-3" style="color : #40513B"><strong>Mes réservations(<%= @bookings_as_r.count %>)</strong></h6>
       <% @bookings_as_r.each do |booking| %>
-        <div class="card-product m-2" style="border-radius: 15px;  background: #9DC08B">
+        <div class="card-product m-2" style="border-radius: 5px;  background: #EDF1D6">
           <% if booking.caban.photos.attached?%>
             <%= cl_image_tag booking.caban.photos.first.key %>
           <% end %>
-            <div class="card-product-infos">
+            <div class="card-product-infos" style="height: fit-content">
               <h2><%= booking.caban.name%></h2>
               <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
               <p> Total de la réservation : <%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</p>
@@ -48,14 +59,14 @@
         <% end %>
     </div>
 
-    <div class="col-3 m-2 p-3 border" style="background: #40513B; border-radius: 5px;">
+    <div class="col-4 m-2 p-3" style="background: #EDF1D6; border-radius: 5px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
 
       <div class="d-flex justify-content-between">
         <div class="title">
-          <h6 class="text-start" style="color : #EDF1D6"><strong> Mes demandes de réservation (<%= @bookings_as_p.count %>)</strong></h6>
+          <h6 class="text-start" style="color : #40513B"><strong> Mes demandes de réservation (<%= @bookings_as_p.count %>)</strong></h6>
         </div>
         <div class="dropdown mb-1">
-          <button class="btn btn-secondary btn-sm dropdown-toggle" style="background: #40513B; color: #EDF1D6" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" data-action="dropdown#toggle click@window->dropdown#hide" aria-expanded="false">
+          <button class="btn btn-secondary btn-sm dropdown-toggle" style="background: #40513B; color: #EDF1D6" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" data-action="dropdown#toggle click@window->dropdown#hide" aria-expanded="false"><i class="fa-solid fa-filter"></i>
             Status
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" data-dropdown-target="menu"
@@ -74,12 +85,12 @@
       </div>
 
       <% @bookings_as_p.each do |booking| %>
-      <div class="card-product m-2" style="border-radius: 15px; background: #9DC08B">
+      <div class="card-product m-2" style="border-radius: 5px; background: #EDF1D6">
         <% if booking.caban.photos.attached?%>
           <%= cl_image_tag booking.caban.photos.first.key %>
         <% end %>
-        <div class="card-product-infos">
-          <h2><%= booking.caban.name%></h2>
+        <div class="card-product-infos" style="height: fit-content">
+          <h2 ><%= booking.caban.name%></h2>
             <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
             <p> Total de la réservation : <%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</p>
             <% if booking.status == "declined" %>
@@ -102,6 +113,10 @@
       <% end %>
     </div>
 
+
+  </div>
+
+  <div>
 
   </div>
 </div>
