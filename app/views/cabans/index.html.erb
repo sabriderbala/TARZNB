@@ -1,41 +1,49 @@
 <div class="mt-1">
-  <div class="row">
-    <div class="col-3 p-3">
-        <% @cabans.each do |caban| %>
-        <%= link_to caban_path(caban), class:"text-decoration-none", style:"color: black" do %>
-        <div class="card-trip col-12 m-2">
-          <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner" >
-              <% caban.photos.each_with_index do |photo, index|%>
-                <% if index == 0 %>
-                  <div class="carousel-item active">
-                <% else %>
-                  <div class="carousel-item">
+  <%= form_with url: cabans_path, method: :get, class: "d-flex" do %>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "form-control",
+      placeholder: "Find a caban"
+    %>
+    <%= submit_tag "Search", class: "btn btn-primary" %>
+  <% end %>
+    <div class="row">
+      <div class="col-3 p-3">
+          <% @cabans.each do |caban| %>
+          <%= link_to caban_path(caban), class:"text-decoration-none", style:"color: black" do %>
+          <div class="card-trip col-12 m-2">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner" >
+                <% caban.photos.each_with_index do |photo, index|%>
+                  <% if index == 0 %>
+                    <div class="carousel-item active">
+                  <% else %>
+                    <div class="carousel-item">
+                  <% end %>
+                    <%= cl_image_tag photo.key, height: 300, width: 500, crop: :fill %>
+                    </div>
                 <% end %>
-                  <%= cl_image_tag photo.key, height: 300, width: 500, crop: :fill %>
-                  </div>
-              <% end %>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+            <div class="card-trip-infos">
+              <div>
+                <h2><%=caban.name %></h2>
+                <p><%= caban.address %></p>
+              </div>
+              <h2 class="card-trip-pricing"><%= caban.price %>€</h2>
             </div>
           </div>
-          <div class="card-trip-infos">
-            <div>
-              <h2><%=caban.name %></h2>
-              <p><%= caban.address %></p>
-            </div>
-            <h2 class="card-trip-pricing"><%= caban.price %>€</h2>
-          </div>
-        </div>
-        <% end %>
-        <% end %>
-    </div>
+          <% end %>
+          <% end %>
+      </div>
 
     <div class="col-9 mt-3">
       <div style="height: 100vh; position: sticky; top: 0;"

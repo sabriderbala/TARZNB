@@ -2,6 +2,10 @@ class CabansController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @cabans = policy_scope(Caban)
+    if params[:query].present?
+      @cabans = Caban.global_search(params[:query])
+    end
+    
     @markers = @cabans.geocoded.map do |caban|
       {
         lat: caban.latitude,
