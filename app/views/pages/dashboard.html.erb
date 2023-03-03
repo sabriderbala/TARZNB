@@ -22,8 +22,8 @@
           <% end %>
             <div class="card-product-infos" style="height: fit-content">
               <h2><%= booking.caban.name%></h2>
-              <p>Du <%= booking.start_date.strftime('%d/%m/%Y') %> au <%= booking.end_date.strftime('%d/%m/%Y') %></p>
-              <p> Total de la réservation : <%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</p>
+              <p><i class="fa-sharp fa-solid fa-calendar-days"></i> Du <%= booking.start_date.strftime('%d/%m/%Y') %> au <%= booking.end_date.strftime('%d/%m/%Y') %></p>
+              <p> Total de la réservation : <strong><%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</strong></p>
               <% if booking.status == "declined" %>
                 <p class="btn btn-danger"><%= booking.status %></p>
               <% elsif booking.status == "accepted" %>
@@ -68,8 +68,8 @@
         <% end %>
         <div class="card-product-infos" style="height: fit-content">
           <h2 ><%= booking.caban.name%></h2>
-            <p>Du <%= booking.start_date.strftime('%d/%m/%Y') %> au <%= booking.end_date.strftime('%d/%m/%Y') %></p>
-            <p> Total de la réservation : <%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</p>
+            <p><i class="fa-sharp fa-solid fa-calendar-days"></i> Du <%= booking.start_date.strftime('%d/%m/%Y') %> au <%= booking.end_date.strftime('%d/%m/%Y') %></p>
+            <p> Total de la réservation : <strong><%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</strong></p>
             <% if booking.status == "declined" %>
               <p class="btn btn-danger"><%= booking.status %></p>
             <% elsif booking.status == "accepted" %>
@@ -101,16 +101,16 @@
                 <div class="card-product-infos" style="height: fit-content">
                     <h2><%=caban.name %></h2>
                     <p><%= caban.price %>€</p>
-                    <p class="fw-normal fst-italic"><%= caban.address %></p>
+                    <p class="fw-normal fst-italic"><i class="fa-solid fa-location-dot"></i> <%= caban.address %></p>
                 </div>
                 <div class="d-flex flex-column">
                   <%= link_to caban_path(caban), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"text-decoration-none text-dark" do %>
                     <i class="fa-solid fa-trash-can m-2 text-dark"></i>
-                    Supprimer
+
                   <% end %>
                   <%= link_to edit_caban_path(caban), class:"text-decoration-none text-dark" do %>
                     <i class="fa-solid fa-pen-to-square m-2 text-dark"></i>
-                    Editer
+
                   <% end %>
                 </div>
               </div>
