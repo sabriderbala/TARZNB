@@ -1,0 +1,42 @@
+<%= link_to caban_path(caban), class:"text-decoration-none", style:"color: black; height: fit-content" do %>
+          <div class="card-trip">
+
+
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner" >
+                <% caban.photos.each_with_index do |photo, index|%>
+
+                  <% if index == 0 %>
+                    <div class="carousel-item active">
+                      <%= cl_image_tag photo.key, style:"width: 100%; height: 100px;", crop: :fill%>
+                    </div>
+                  <% else %>
+                    <div class="carousel-item">
+                      <%= cl_image_tag photo.key, style:"width: 100%; height: 100px;", crop: :fill%>
+                    </div>
+                  <% end %>
+
+                <% end %>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+
+              </div>
+            </div>
+
+            <div class="card-trip-infos">
+              <div>
+                <h2><%=caban.name.capitalize %></h2>
+                <p><%= caban.address.capitalize %></p>
+              </div>
+              <h2 class="card-trip-pricing"><%= caban.price %>€</h2>
+            </div>
+
+          </div>
+        <% end %>

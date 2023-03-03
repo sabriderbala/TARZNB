@@ -22,8 +22,3 @@ application.register("map", MapController)
 import TypedJsController from "./typed_js_controller"
 application.register("typed-js", TypedJsController)
 
-import { Application } from '@hotwired/stimulus'
-import Dropdown from 'stimulus-dropdown'
-
-const application = Application.start()
-application.register('dropdown', Dropdown)

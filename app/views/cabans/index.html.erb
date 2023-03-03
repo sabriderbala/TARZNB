@@ -13,8 +13,8 @@
         Trier par prix
       </a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <li class="dropdown-item"><%= link_to "Ascendant", cabans_path(order: "ASC")%></li>
-        <li class="dropdown-item"><%= link_to "Descendant", cabans_path(order: "DESC")%></li>
+        <li class="dropdown-item"><%= link_to "Croissant", cabans_path(order: "ASC"), class: "text-decoration-none" %></li>
+        <li class="dropdown-item"><%= link_to "Décroissant", cabans_path(order: "DESC"), class: "text-decoration-none"%></li>
       </ul>
     </div>
   </div>
@@ -63,7 +63,7 @@
 
           </div>
         <% end %>
-        
+
       <% end %>
 
 
