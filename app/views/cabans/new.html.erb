@@ -6,7 +6,7 @@
         <%= simple_form_for [@caban] do |f| %>
           <%= f.input :name, placeholder: "Tarzan", label: "Nom" %>
           <p>Adresse</p>
-          <%= f.input :address, as: :hidden, input_html: {data: {address_autocomplete_target: "address"}}, wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}, placeholder: "5 rue du Platane", class: "d-none"%>
+          <%= f.input :address, input_html: {data: {address_autocomplete_target: "address"}}, wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}, placeholder: "5 rue du Platane", class: "d-none"%>
           <%= f.input :price, placeholder: "100 €", label: "Prix par nuit" %>
           <%= f.input :description, placeholder: "La cabane est dans un arbre magnifique..." %>
           <%= f.input :photos, as: :file, input_html: { multiple: true }, class: "mr-auto p-2" %>
