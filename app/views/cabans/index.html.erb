@@ -1,5 +1,5 @@
 
-<div class="pages">
+<div class="pages px-4">
   <div class="d-flex justify-content-center p-3 search w-100">
     <%= form_with url: cabans_path, method: :get, class: "d-flex w-50" do %>
       <%= text_field_tag :query,
@@ -18,6 +18,10 @@
       </ul>
     </div>
   </div>
+
+  <div>
+
+  </div>
   <div class="row">
     <div class="col-6 grid-2-col" style="height: fit-content">
       <% @cabans.each do |caban| %>
@@ -31,11 +35,11 @@
 
                   <% if index == 0 %>
                     <div class="carousel-item active">
-                      <%= cl_image_tag photo.key, style:"width: 100%; height: 200px;", crop: :fill%>
+                      <%= cl_image_tag photo.key, style:"width: 100%; height: 250px;", crop: :fill%>
                     </div>
                   <% else %>
                     <div class="carousel-item">
-                      <%= cl_image_tag photo.key, style:"width: 100%; height: 200px;", crop: :fill%>
+                      <%= cl_image_tag photo.key, style:"width: 100%; height: 250px;", crop: :fill%>
                     </div>
                   <% end %>
 
