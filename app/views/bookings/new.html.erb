@@ -26,8 +26,8 @@
 </div>
 
 <div class="col-4 p-3">
-<div class="container d-flex align-items-center flex-column">
-  <h1><%="Sélectionnez vos dates pour #{@caban.name}" %></h1>
+<div class="container d-flex align-items-center flex-column p-5">
+  <h5 class="text-center">Sélectionnez vos dates pour : <br><strong><%="#{@caban.name}" %></strong></h5>
   <div data-controller="dynamic-booking-price"
        data-dynamic-booking-price-price-value="<%= @caban.price %>">
     <%= simple_form_for [@caban, @booking],
@@ -66,7 +66,7 @@
     <p class="border-top"> Prix total de la réservation : <span data-dynamic-booking-price-target="priceHolder"><%= @caban.price %></span> € </p>
   <div class="d-flex justify-content-between">
       <%= f.submit "Réserver", class:"btn btn-primary" %>
-            <%= link_to "Retour", caban_path(@caban), class: "btn btn-secondary my-2" %>
+            <%= link_to "Retour", caban_path(@caban), class: "btn btn-secondary", style: "background: #40513B; color: white" %>
       <% end %>
 
   </div>
