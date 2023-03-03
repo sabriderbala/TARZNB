@@ -5,7 +5,13 @@ class CabansController < ApplicationController
     if params[:query].present?
       @cabans = Caban.global_search(params[:query])
     end
-    
+
+    if params[:order] == "ASC"
+      @cabans = @cabans.order(:price)
+    elsif params[:order] == "DESC"
+      @cabans = @cabans.order(price: :desc)
+    end
+
     @markers = @cabans.geocoded.map do |caban|
       {
         lat: caban.latitude,
@@ -14,14 +20,6 @@ class CabansController < ApplicationController
       }
     end
 
-    @cabans = Caban.all
-    if params[:order] == "ASC"
-      @cabans = Caban.order(:price)
-    elsif params[:order] == "DESC"
-      @cabans = Caban.order(price: :desc)
-    else
-      @cabans = Caban.all
-    end
   end
 
   def show
