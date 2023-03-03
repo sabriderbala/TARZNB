@@ -1,4 +1,4 @@
-<div class="page">
+
 <div class="container mt-3" style="width: 1200px;">
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner" style="height: 500px; border-radius: 3%;">
@@ -31,41 +31,61 @@
       <h2 class="card-title"><%= @caban.name.capitalize %></h2>
       <h3 class="card-text"><%= @caban.price %>€</h3>
     </div>
-  <div class="infos mt-3">
-    <h5 class="fst-italic">Découvrez cette magnifique cabane située : <%= @caban.address %></h5>
-    <h5 class="card-text"><%= @caban.description.capitalize %></h5>
-     <% if @caban.user != current_user %>
-      <div class="d-flex align-items-center">
-        <h5 class="card-text mb-0 me-2"> Votre super hôte :</h5>
-        <% if @caban.user.photo.attached?%>
-          <%= cl_image_tag @caban.user.photo.key, crop: :fit, class: "avatar me-2"%>
-        <% else %>
-          <%= image_tag "https://cdn.dribbble.com/userupload/2582751/file/original-f6ac5f1e412b80da59bcf4eaff521100.jpg?resize=400x0", class: "avatar me-2" %>
-        <% end %>
-        <h5 class="card-text"><%=@caban.user.first_name %></h5>
-      </div>
-    <% end %>
+    <div class="infos mt-3">
+      <h5 class="fst-italic">Découvrez cette magnifique cabane située : <%= @caban.address %></h5>
+      <h5 class="card-text"><%= @caban.description.capitalize %></h5>
+      <% if @caban.user != current_user %>
+        <div class="d-flex align-items-center">
+          <h5 class="card-text mb-0 me-2"> Votre super hôte :</h5>
+          <% if @caban.user.photo.attached?%>
+            <%= cl_image_tag @caban.user.photo.key, crop: :fit, class: "avatar me-2"%>
+          <% else %>
+            <%= image_tag "https://cdn.dribbble.com/userupload/2582751/file/original-f6ac5f1e412b80da59bcf4eaff521100.jpg?resize=400x0", class: "avatar me-2" %>
+          <% end %>
+          <h5 class="card-text"><%=@caban.user.first_name %></h5>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div class="container d-flex justify-content-end">
-  <% if @caban.user != current_user %>
+    <% if @caban.user != current_user %>
+      <div class="m-3">
+        <%= link_to "Réserver", new_caban_booking_path(@caban), class: "btn btn-primary" %>
+      </div>
+    <% end %>
     <div class="m-3">
-    <%= link_to "Réserver", new_caban_booking_path(@caban), class: "btn btn-primary" %>
-    </div>
-  <% end %>
-    <div class="m-3">
-    <%= link_to "Retour", cabans_path(@cabans), class: "btn btn-primary" %>
+      <%= link_to "Retour", cabans_path(@cabans), class: "btn btn-primary" %>
 
     </div>
+  </div>
+  <div class="row mt-5 border-top align-items-center">
+
+    <div class="col-6 mt-3">
+        <p class="fs-3"><i class="fa-solid fa-location-dot"></i> Localisation</p>
+        <div class="mt-3 mb-5" style="height: 500px;"
+          data-controller="map"
+          data-map-markers-value="<%= @marker.to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
+    </div>
+
+    <div class="col-6 mt-3">
+      <p class="fs-3"><i class="fa-solid fa-address-book"></i> Votre super hôte</p>
+      <p class="fs-6">Adresse : <strong><%= @caban.address %></strong></p>
+      <p class="fs-6">Contact : <strong><%= @caban.user.email %></strong></p>
+      <p class="fs-6"> Votre logement proposé par : <strong><%= @caban.user.first_name.capitalize %> <%= @caban.user.last_name.capitalize %></strong>
+          <% if @caban.user.photo.attached?%>
+            <%= cl_image_tag @caban.user.photo.key, crop: :fit, class: "avatar me-2"%>
+          <% else %>
+            <%= image_tag "https://cdn.dribbble.com/userupload/2582751/file/original-f6ac5f1e412b80da59bcf4eaff521100.jpg?resize=400x0", class: "avatar me-2" %>
+          <% end %>
+      </p>
+      <p class="fs-4"><i class="fa-solid fa-circle-info"></i> Ce que propose ce logement</p>
+      <p class="fs-6"><i class="fa-solid fa-temperature-three-quarters"></i> Chauffage d'appoint</p>
+      <p class="fs-6"><i class="fa-solid fa-tree"></i> Espace repas en plein air</p>
+      <p class="fs-6"><i class="fa-solid fa-car"></i> Parking gratuit sur place</p>
+      <p class="fs-6"><i class="fa-solid fa-kitchen-set"></i> Cuisine</p>
+    </div>
 
   </div>
-  </div>
-  <div class="container">
-    <h2 class="card-title border-bottom border-dark text-center">Localisation</h2>
-    <div class="mt-3" style="width: 100%; height: 500px;"
-      data-controller="map"
-      data-map-markers-value="<%= @marker.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-    </div>
-  </div>
-</div>
 </div>
