@@ -21,4 +21,3 @@ application.register("map", MapController)
 
 import TypedJsController from "./typed_js_controller"
 application.register("typed-js", TypedJsController)
-
