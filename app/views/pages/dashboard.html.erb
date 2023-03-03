@@ -10,24 +10,32 @@
   <div class="row justify-content-center p-2" style="background: #EDF1D6;">
 
 
-
-    <div class="col-4 m-2 p-3" style="background: #EDF1D6; border-radius: 5px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
-      <h6 class="text-start pb-3" style="color : #40513B"><strong>Mes réservations(<%= @bookings_as_r.count %>)</strong></h6>
+      <h3 class="text-center mt-2">Espace Locataire</h3>
+    <div class="col-8 m-2 p-3" style="background: #EDF1D6; border-radius: 5px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+      <h6 class="text-start pb-3" style="color : #40513B"><strong>Mes demandes de réservation (<%= @bookings_as_r.count %>)</strong></h6>
       <% @bookings_as_r.each do |booking| %>
         <div class="card-product m-2" style="border-radius: 5px;  background: #EDF1D6">
-          <% if booking.caban.photos.attached?%>
-            <%= cl_image_tag booking.caban.photos.first.key %>
+          <%= link_to caban_path(booking.caban) do %>
+            <% if booking.caban.photos.attached?%>
+              <%= cl_image_tag booking.caban.photos.first.key %>
+            <% end %>
           <% end %>
             <div class="card-product-infos" style="height: fit-content">
               <h2><%= booking.caban.name%></h2>
-              <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
+              <p>Du <%= booking.start_date.strftime('%d/%m/%Y') %> au <%= booking.end_date.strftime('%d/%m/%Y') %></p>
               <p> Total de la réservation : <%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</p>
-              <p><%= booking.status %></p>
+              <% if booking.status == "declined" %>
+                <p class="btn btn-danger"><%= booking.status %></p>
+              <% elsif booking.status == "accepted" %>
+                <p class="btn btn-success"><%= booking.status %></p>
+              <% else %>
+                <p class="btn btn-warning"><%= booking.status %></p>
+              <% end %>
             </div>
         </div>
         <% end %>
     </div>
-
+      <h3 class="text-center mt-2">Espace Propriétaire</h3>
     <div class="col-4 m-2 p-3" style="background: #EDF1D6; border-radius: 5px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
 
       <div class="d-flex justify-content-between">
@@ -36,7 +44,7 @@
         </div>
         <div class="dropdown mb-1">
           <button class="btn btn-secondary btn-sm dropdown-toggle" style="background: #40513B; color: #EDF1D6" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" data-action="dropdown#toggle click@window->dropdown#hide" aria-expanded="false"><i class="fa-solid fa-filter"></i>
-            Status
+            Statuts
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" data-dropdown-target="menu"
             class="hidden transition transform origin-top-right absolute right-0"
@@ -60,7 +68,7 @@
         <% end %>
         <div class="card-product-infos" style="height: fit-content">
           <h2 ><%= booking.caban.name%></h2>
-            <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
+            <p>Du <%= booking.start_date.strftime('%d/%m/%Y') %> au <%= booking.end_date.strftime('%d/%m/%Y') %></p>
             <p> Total de la réservation : <%= ((booking.end_date - booking.start_date).to_i) * booking.caban.price %> €</p>
             <% if booking.status == "declined" %>
               <p class="btn btn-danger"><%= booking.status %></p>
